@@ -1,5 +1,5 @@
 //DATI
-const emailUtente = document.querySelector('[type="email"]');
+
 const button = document.querySelector('[type="submit"]');
 const output = document.querySelector('p');
 const utentiRegistrati = [
@@ -11,29 +11,31 @@ const utentiRegistrati = [
 ];
 
 
+button.addEventListener('click', checkEmail);
 
-//LOGICA
-button.addEventListener('click', checkEmail );
 
 function checkEmail () {
-  let stampOutput;
-  let utentiPresenti;
+  const emailUtente = document.querySelector('[type="email"]').value;
+  let checkUtente = false;
+  let messageOutput;
+  console.log(emailUtente);
+  //LOGICA
+  for(let i = 0; i < utentiRegistrati.length; i++){
+    if(emailUtente === utentiRegistrati[i]){
+      checkUtente = true;
+    }
+  }
 
-  for (let i = 0; i < utentiRegistrati.length; i++){
- 
-    utentiPresenti = utentiRegistrati[i];
+  if(checkUtente){
+    messageOutput = 'Bentornato hai 96 messaggi da leggere';
+  }else if (emailUtente === ''){
+    messageOutput = 'fornisci email';
+  } else {
+    messageOutput = 'non sei registrato';
   }
-  console.log(utentiPresenti);
-  if (emailUtente.value === utentiPresenti) {
-    stampOutput = 'Bentornato, hai 50 messaggi da leggere';
-  }else {
-    stampOutput = 'Ci dispiace non sei registrato';
-  }
-  
-  
-  output.innerHTML = stampOutput;
+
+  // output
+  output.innerHTML = messageOutput;
 }
-
-
 
 
